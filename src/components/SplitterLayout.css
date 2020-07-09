@@ -1,0 +1,59 @@
+:root{
+  --layout-seperator-width: 4px;
+  --layout-seperator-color-normal: var(--default-seperator-color);
+  --layout-seperator-color-hover: var(--default-seperator-color);
+  --layout-seperator-color-changing: var(--default-seperator-color);
+}
+
+.splitter-layout {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.splitter-layout .layout-pane {
+  position: relative;
+  flex: 0 0 auto;
+  overflow: auto;
+}
+
+.splitter-layout .layout-pane.layout-pane-primary {
+  flex: 1 1 auto;
+}
+
+.splitter-layout > .layout-splitter {
+  flex: 0 0 auto;
+  width: var(--layout-seperator-width);
+  height: 100%;
+  cursor: col-resize;
+  background-color: var(--layout-seperator-color-normal);
+}
+
+.splitter-layout .layout-splitter:hover {
+  background-color: var(--layout-seperator-color-hover);
+}
+
+.splitter-layout.layout-changing {
+  cursor: col-resize;
+}
+
+.splitter-layout.layout-changing > .layout-splitter {
+  background-color: var(--layout-seperator-color-changing);
+}
+
+.splitter-layout.splitter-layout-vertical {
+  flex-direction: column;
+}
+
+.splitter-layout.splitter-layout-vertical.layout-changing {
+  cursor: row-resize;
+}
+
+.splitter-layout.splitter-layout-vertical > .layout-splitter {
+  width: 100%;
+  height: var(--layout-seperator-width);
+  cursor: row-resize;
+}

@@ -1,0 +1,192 @@
+:root{
+  --nav-bar-height: 28px;
+  --nav-bar-background: var(--default-component-background);
+  --nav-bar-menu-background: var(--nav-bar-background);
+  --nav-bar-menu-item-background: var(--nav-bar-background);
+  --nav-bar-menu-button-background: var(--nav-bar-background);
+  --nav-bar-menu-button-active-background: #00ABFE;
+  /* --nav-bar-menu-seperator-color: #585858; */
+  --nav-bar-menu-seperator-color: var(--default-seperator-color);
+  --nav-bar-text-color: hsl(0, 0%, 98%);
+  --nav-bar-text-color-disabled: #777777;
+  --nav-bar-font-size: 9pt;
+  --nav-bar-font-weight: 500;
+}
+
+.nav-bar{
+  position: absolute;
+  z-index: 2;
+  height: var(--nav-bar-height);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px var(--nav-bar-menu-seperator-color);
+  width: 100%;
+  background: var(--nav-bar-background);
+}
+
+.nav-bar-group{
+  display: inline-flex;
+}
+
+.nav-bar-blank-group{
+  background: var(--nav-bar-background);
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.nav-bar-menu{
+  display: inline;
+  /* z-index: 3; */
+}
+
+.nav-bar-menu-button{
+  color: var(--nav-bar-text-color);
+  letter-spacing: normal;
+  word-spacing: 0px;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: normal;
+  cursor: pointer;
+  background: var(--nav-bar-menu-button-background);
+  box-sizing: content-box;
+  margin: 0px;
+  font-family: var(--inter-font-family);
+  font-size: var(--nav-bar-font-size);
+  font-weight: var(--nav-bar-font-weight);
+  padding: 0px .25em;
+  border: none;
+  outline: none;
+  height: 100%;
+  z-index: 3;
+  position: relative;
+}
+
+.nav-bar-menu-button:hover,
+.nav-bar-menu-button:active,
+.nav-bar-menu-button-open {
+  background: var(--nav-bar-menu-button-active-background);
+}
+
+
+.nav-bar-menu-button-label{
+  user-select: none;
+  -moz-user-select: none;
+  padding: .25em;
+}
+.nav-bar-menu-content{
+  opacity: 1;
+  /* transition: all 100ms ease; */
+  display: none;
+  background: var(--nav-bar-menu-background);
+  position: absolute;
+  z-index: 1;
+  width: fit-content;
+  border: solid 1px var(--nav-bar-menu-seperator-color);
+  padding-bottom: 3px;
+  padding-top: 3px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.nav-bar-menu-content-hidden{
+  opacity: 0;  
+}
+.nav-bar-menu-content-visible{
+  display: block !important;
+}
+
+
+
+.nav-bar-menu-content-fadeout{
+  display: block !important;
+  transition: all 150ms ease;
+  opacity: 0;  
+}
+
+
+.nav-bar-menu-item{
+  width: 100%;
+  cursor: pointer;
+  background: var(--nav-bar-menu-item-background);
+  letter-spacing: normal;
+  word-spacing: 0px;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  box-sizing: content-box;
+  margin: 0px;
+  font-family: var(--inter-font-family);
+  font-size: var(--nav-bar-font-size);
+  font-weight: var(--nav-bar-font-weight);
+  padding: 0px;
+  border: none;
+  outline: none;
+  display: grid;
+  grid-template-columns: 15px auto auto;
+  padding-top: .125em;
+  padding-bottom: .125em;
+}
+
+
+.nav-bar-menu-item:hover,
+/* .nav-bar-menu-item:active, */
+.nav-bar-menu-item-open{
+  background: var(--nav-bar-menu-button-active-background);
+}
+
+.nav-bar-menu-item:active{
+  background: var(--nav-bar-menu-item-background);
+}
+
+.nav-bar-menu-item-disabled:hover,
+.nav-bar-menu-item-disabled:active{
+  background: var(--nav-bar-menu-item-background);
+  cursor: default;
+}
+
+.nav-bar-menu-item-checkmark{
+  color: var(--nav-bar-text-color);
+  text-align: center;
+}
+.nav-bar-menu-item-label{
+  color: var(--nav-bar-text-color);
+  font-weight: var(--nav-bar-font-weight);
+  user-select: none;
+  -moz-user-select: none;
+  padding: 0;
+  padding-right: 1em;
+  padding-left: 0.25em;
+}
+
+.nav-bar-menu-item-hotkey-container{
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-bar-menu-item-hotkey-container > span {
+  color: var(--nav-bar-text-color);
+  font-family: var(--inter-font-family);
+  font-weight: var(--nav-bar-font-weight);
+   user-select: none;
+  -moz-user-select: none;
+  width: 15px;
+}
+
+
+.nav-bar-menu-seperator {
+  border-top: solid 1px var(--nav-bar-menu-seperator-color);
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.nav-bar-menu-item-disabled > *, .nav-bar-menu-item-disabled > .nav-bar-menu-item-hotkey-container > span{
+  color: var(--nav-bar-text-color-disabled);
+}

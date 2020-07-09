@@ -1,0 +1,10 @@
+:root{
+  --sidebar-background: var(--default-component-background);
+  --sidebar-seperator-color: var(--default-seperator-color);
+}
+
+.sidebar{
+  background: var(--sidebar-background);
+  width: 100%;
+  height: 100%;
+}

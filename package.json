@@ -1,5 +1,5 @@
 {
-  "name": "treeview",
+  "name": "cam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,10 +10,19 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/recoil": "^0.0.1",
+    "drei": "^0.0.60",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^4.2.10",
+    "react-three-gui": "^0.1.5",
+    "react-use-measure": "^2.0.1",
+    "recoil": "^0.0.10",
+    "three": "^0.117.1",
+    "typescript": "^3.9.6",
+    "uuid": "^8.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/three": "^0.103.2"
   }
 }

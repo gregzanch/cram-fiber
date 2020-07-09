@@ -1,0 +1,50 @@
+.editor-container{
+  
+  height: calc(100% - var(--nav-bar-height));
+}
+
+.editor-container, .layout-changing{
+  --layout-change-transition: 75ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
+}
+
+.editor-container > * > canvas {
+  outline: none;
+  position: absolute !important;
+  object-fit: none;
+   -webkit-transition: width var(--layout-change-transition);
+  -moz-transition:  width var(--layout-change-transition);
+  -o-transition:  width var(--layout-change-transition);
+  transition:  width var(--layout-change-transition);
+
+  
+}
+
+.editor-container > div {
+  position: absolute !important;
+  background: #434342 !important;
+  /* opacity: 1.0 !important;
+   -webkit-transition: opacity var(--layout-change-transition);
+  -moz-transition: opacity var(--layout-change-transition);
+  -o-transition: opacity var(--layout-change-transition);
+  transition: opacity var(--layout-change-transition); */
+  display: flex;
+  justify-content: center;
+}
+
+/* .layout-changing > .layout-pane > .editor-container > div{
+  background: #949494 !important;
+    -webkit-transition: var(--layout-change-transition);
+  -moz-transition: var(--layout-change-transition);
+  -o-transition: var(--layout-change-transition);
+  transition: var(--layout-change-transition);
+} */
+
+
+
+/* .layout-changing > .layout-pane > .editor-container > div > canvas {
+  opacity: 1.0 !important;
+    -webkit-transition: opacity var(--layout-change-transition), width var(--layout-change-transition);
+  -moz-transition: opacity var(--layout-change-transition), width var(--layout-change-transition);
+  -o-transition: opacity var(--layout-change-transition), width var(--layout-change-transition);
+  transition: opacity var(--layout-change-transition), width var(--layout-change-transition);
+} */
