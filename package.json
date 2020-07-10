@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@types/three": "^0.103.2"
+    "@types/three": "^0.103.2",
+    "websocket-extensions": "^0.1.4"
   }
 }
