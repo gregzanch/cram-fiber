@@ -1,3 +1,3 @@
-# cam
+# cram-fiber
 
-*computational acoustics module*
+*computational acoustics module using react-three-fiber*
