@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavBarComponent } from './components/NavBarComponent';
-import { Editor } from './components/Editor';
+import { Editor } from './components/Editor/Editor';
 import { RecoilRoot, MutableSnapshot } from "recoil";
 import { PersistenceObserver } from './state/Persistence';
 import * as GlobalState from './state/GlobalState';

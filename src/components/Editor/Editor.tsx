@@ -9,7 +9,7 @@ import React, {
 
 import {
 	Canvas,
-	// extend,
+	extend,
 	// useThree,
 	// useFrame,
 	// useRender,
@@ -43,7 +43,7 @@ import {
 	useRecoilState
 } from "recoil";
 
-import { layoutChangingState } from './SplitterLayout.state';
+import { layoutChangingState } from '../SplitterLayout.state';
 
 import { objectDisplayStyleState } from './Editor.state';
 import { OBJECT_DISPLAY_STYLES } from './Editor.const';
@@ -62,27 +62,12 @@ import {
 	EffectPass,
 } from "postprocessing";
 
+import { Grid } from './Objects/Grid';
+import { Axes } from "./Objects/Axes";
+
 Object.assign(window, { THREE });
 
-// extend({ OrbitControls });
-
-// const controls = () => {
-// 	const orbitRef = useRef();
-// 	const { camera, gl } = useThree();
-	
-// 	useRender(() => {
-// 		orbitRef.current.update();
-// 	});
-	
-// 	return (
-// 		<orbitControls
-// 			args={[camera, gl.domElement]}
-// 			ref={orbitRef}
-// 		/>
-// 	)
-// }
-
-
+extend({Grid, Axes})
 
 function Sphere({ position, radius }: { position: Number[], radius: number }) {
 	// This reference will give us direct access to the mesh
@@ -221,7 +206,7 @@ const SurfaceGroup = ({ m, displayStyle }: { m: THREE.Mesh, displayStyle: string
 		(material: THREE.MeshStandardMaterial) => {
 			// geometry.addAttribute("position", getVertices(x, y, z));
 			// geometry.attributes.position.needsUpdate = true;
-			console.log(material.transparent);
+			// console.log(material.transparent);
 		},
 		[displayStyle] // execute only if these properties change
 	);
@@ -243,7 +228,7 @@ const SurfaceGroup = ({ m, displayStyle }: { m: THREE.Mesh, displayStyle: string
 
 const Room = ({ displayStyle }: { displayStyle: string; }) => {
 	//@ts-ignore
-	const { nodes } = useLoader(GLTFLoader, "http://127.0.0.1:4444/concord.gltf");
+	const { nodes } = useLoader(GLTFLoader, "/res/models/concord/concord.gltf");
 	const groupRef = useRef<THREE.Group>();
 	return (
 		<group ref={groupRef}>
@@ -266,26 +251,7 @@ function Objects({ displayStyle }: { displayStyle: string }) {
 }
 
 
-export interface GridProps {
-	size: number;
-	divisions: number;
-	color1: number;
-	color2: number;
-}
 
-const Grid = (props: GridProps) => {
-	const helper = useRef<THREE.GridHelper>();
-	
-	
-	return (
-		<gridHelper
-			args={[props.size, props.divisions, props.color1, props.color2]}
-			ref={helper}
-			position={[0, 0, 0]}
-			rotation={[Math.PI / 2, 0, 0, "XYZ"]}
-		/>
-	);
-}
 
 const Plane = () => {
 	
@@ -305,7 +271,7 @@ const Plane = () => {
 
 	return (
 		<group name="ground-plane">
-			{/* <Grid size={planeSize} divisions={planeSize} color1={0xdddddd} color2={0xeeeeee}/> */}
+			
 
 			<mesh receiveShadow position={[0, 0, 0]}>
 				<planeBufferGeometry
@@ -335,16 +301,6 @@ const Fog = () => {
 }
 
 export interface EditorProps {}
-
-const rtTexture = new THREE.WebGLRenderTarget(
-	window.innerWidth,
-	window.innerHeight,
-	{
-		minFilter: THREE.LinearFilter,
-		magFilter: THREE.NearestFilter,
-		format: THREE.RGBFormat,
-	}
-);
 
 
 function StandardEffects({
@@ -412,7 +368,7 @@ function StandardEffects({
 		effectPass.renderToScreen = true;
 		composer.addPass(normalPass);
 		composer.addPass(effectPass);
-		console.log(composer);
+		// console.log(composer);
 		return composer;
 	}, [camera, gl, scene, smaa, ao, bloom, edgeDetection, bloomOpacity]);
 	useEffect(() => void composer.setSize(size.width, size.height), [
@@ -421,25 +377,17 @@ function StandardEffects({
 	]);
 	return useFrame((_, delta) => {
 		composer.render(delta);
-		console.log('a');
 	}, 1);
 }
 
 export function Editor(props: EditorProps) {
-	
 
-	// const bias = useControl("bias", EffectsControlOpts(0, .1, 0.025));
-	// const radius = useControl("radius", EffectsControlOpts(0, .1, .1825));
-	// const luminanceInfluence = useControl("luminanceInfluence", EffectsControlOpts(0, .1, 0.7));
-	// const rangeFalloff = useControl("rangeFalloff", EffectsControlOpts(0.0, .1, 0.001));
-	// const rangeThreshold = useControl("rangeThreshold", EffectsControlOpts(0.0, 0.01, 0.0005));
-	// const distanceFalloff = useControl("distanceFalloff", EffectsControlOpts(0.0, 1.0, 0.03));
-	// const distanceThreshold = useControl("distanceThreshold", EffectsControlOpts(0.0, 1.0, 0.97));
-	// const rings = useControl("rings", EffectsControlOpts(0.0, 1.0, 7));
-	// const samples = useControl("samples", EffectsControlOpts(0.0, 25, 9));
 	
 	const [displayStyleState] = useRecoilState(objectDisplayStyleState);
 	// const [ref, bounds] = useMeasure();
+	const gridRef = useRef<Grid>();
+	const axesRef = useRef<Axes>();
+
 	
 	return (
 		<div className="editor-container">
@@ -465,7 +413,7 @@ export function Editor(props: EditorProps) {
 				}}
 				onCreated={(props) => {
 					const { gl } = props;
-					console.log(gl);
+					// console.log(gl);
 					let splitterElement = gl.domElement.parentElement;
 					while (
 						splitterElement.parentElement &&
@@ -500,11 +448,20 @@ export function Editor(props: EditorProps) {
 
 					gl.shadowMap.enabled = true;
 					gl.shadowMap.type = THREE.PCFSoftShadowMap;
-				}}>
-				{/* <Fog /> */}
+				}}
+			>
 				<Lights />
 				<Suspense fallback={<React.Fragment />}>
-					<Plane />
+					{/* <Plane />
+					 */}
+					<grid
+						ref={gridRef}
+						args={["asdf", 50, 1, 10, 0x000000, 0xFFFFFF]} 
+					/>
+					<axes
+						ref={axesRef}
+						args={["axes", 50, true, true, false]} 
+					/>
 					<Objects displayStyle={displayStyleState} />
 					<StandardEffects
 						smaa

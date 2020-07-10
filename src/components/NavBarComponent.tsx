@@ -7,8 +7,8 @@ import {
 import { useClickOutside } from '../hooks';
 
 import { navBarMenuState } from './NavBarComponent.state';
-import { objectDisplayStyleState } from './Editor.state';
-import { OBJECT_DISPLAY_STYLES } from "./Editor.const";
+import { objectDisplayStyleState } from './Editor/Editor.state';
+import { OBJECT_DISPLAY_STYLES } from "./Editor/Editor.const";
 
 
 
