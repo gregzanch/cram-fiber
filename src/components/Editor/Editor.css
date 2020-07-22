@@ -21,7 +21,7 @@
 
 .editor-container > div {
   position: absolute !important;
-  background: #434342 !important;
+  /* background: #434342 !important; */
   /* opacity: 1.0 !important;
    -webkit-transition: opacity var(--layout-change-transition);
   -moz-transition: opacity var(--layout-change-transition);

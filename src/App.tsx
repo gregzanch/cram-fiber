@@ -33,16 +33,18 @@ const initializeState = (mutSnapshot: MutableSnapshot) => {
 function App() {
 	const [layoutChangingState, setLayoutChangingState] = useRecoilState(GlobalState.layoutChangingState);
 	return (
-			<div className="app">
-				<NavBarComponent />
-				<SplitterLayout
-					primaryIndex={0}
-					onDragStart={() => setLayoutChangingState(true)}
-					onDragEnd={() => setLayoutChangingState(false)}>
-					<Editor />
-					<Sidebar />
-				</SplitterLayout>
-			</div>
+		<div className="app">
+			<NavBarComponent />
+			<SplitterLayout
+				primaryIndex={0}
+				onDragStart={() => setLayoutChangingState(true)}
+				onDragEnd={() => setLayoutChangingState(false)}
+				customClassName="editor-sidebar"
+			>
+				<Editor />
+				<Sidebar />
+			</SplitterLayout>
+		</div>
 	);
 }
 function AppWrapper() {

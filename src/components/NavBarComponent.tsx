@@ -6,9 +6,14 @@ import {
 
 import { useClickOutside } from '../hooks';
 
-import { navBarMenuState } from './NavBarComponent.state';
-import { objectDisplayStyleState } from './Editor/Editor.state';
-import { OBJECT_DISPLAY_STYLES } from "./Editor/Editor.const";
+
+import {
+	navBarMenuState,
+	objectDisplayStyleState,
+	hotkeyScopeState,
+} from "../state/GlobalState";
+
+import { OBJECT_DISPLAY_STYLES, HOTKEY_SCOPES } from "../constants";
 
 
 
@@ -55,11 +60,16 @@ function sortHotKey(hotkey: string[]) {
 
 export interface NavBarProps {
 	// ref: React.MutableRefObject<HTMLDivElement>;
+	onMouseEnter: (e: React.MouseEvent) => void;
 	children: React.ReactNode;
 }
 
-export const NavBar = React.forwardRef((props: NavBarProps, ref: React.RefObject<HTMLDivElement>) => 
-	( <div ref={ref} className="nav-bar">{props.children}</div>)
+export const NavBar = React.forwardRef((props: NavBarProps, ref: React.RefObject<HTMLDivElement>) => {
+	
+	return (
+		<div ref={ref} className="nav-bar" onMouseEnter={props.onMouseEnter}>{props.children}</div>
+	)
+}
 )
 
 //--------------------------------------------------------
@@ -113,7 +123,9 @@ export function NavBarMenu(props: NavBarMenuProps) {
 	
 	useEffect(() => {
 		setTimeout(() => {
-			menuContentRef.current.classList.remove("nav-bar-menu-content-fadeout");
+			if (menuContentRef.current) {
+				menuContentRef.current.classList.remove("nav-bar-menu-content-fadeout");
+			}
 			// menuContentRef.current.style.display = "none";
 		}, 150)
 	
@@ -202,12 +214,18 @@ export function NavBarComponent(props: NavBarComponentProps) {
 
 	const [displayStyleState, setDisplayStyleState] = useRecoilState(objectDisplayStyleState);
 	const [menuState, setMenuState] = useRecoilState(navBarMenuState);
+	const [hotkeyScope, setHotkeyScope] = useRecoilState(hotkeyScopeState)
 	const ref = useClickOutside(() => setMenuState({
 		navBarHasFocus: false,
 		openMenu: ""
 	}));
+	
+	const handleMouseEnter = () => {
+		setHotkeyScope(HOTKEY_SCOPES.NAVBAR)
+	}
+	
 	return (
-		<NavBar ref={ref}>
+		<NavBar ref={ref} onMouseEnter={handleMouseEnter}>
 			<NavBarGroup>
 				<NavBarMenu label="File">
 					<NavBarMenuItem

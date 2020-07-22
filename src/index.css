@@ -16,7 +16,6 @@ html {
 }
 
 body {
-  background: #000000;
   margin: 0;
   font-family: var(--inter-font-family);
   -webkit-font-smoothing: antialiased;

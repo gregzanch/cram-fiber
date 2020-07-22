@@ -1,8 +1,8 @@
 :root{
-  --layout-seperator-width: 4px;
-  --layout-seperator-color-normal: var(--default-seperator-color);
-  --layout-seperator-color-hover: var(--default-seperator-color);
-  --layout-seperator-color-changing: var(--default-seperator-color);
+  --layout-seperator-width: 2px;
+  --layout-seperator-color-normal: #3f41462d;
+  --layout-seperator-color-hover: #3f41462d;
+  --layout-seperator-color-changing: #3f41462d;
 }
 
 .splitter-layout {

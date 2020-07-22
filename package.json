@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/recoil": "^0.0.1",
     "drei": "^0.0.60",
+    "hotkeys-js": "^3.8.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
