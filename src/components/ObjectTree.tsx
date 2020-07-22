@@ -27,21 +27,7 @@ export const ObjectTree = (props: ObjectTreeProps) => {
   
   return (
     <div className="object-tree-container" onMouseEnter={handleMouseEnter}>
-      <input type="range" min={0} max={10} value={sources[0].position[0]} onChange={e => {
-        const val = e.currentTarget.valueAsNumber;
-        setSources(sources => {
-          const newSrc = {
-            ...sources[0],
-            position: [
-              val,
-              sources[0].position[1],
-              sources[0].position[2]
-            ]
-          } as AcousticSourceProps;
-          return [newSrc]
-        });
-      }
-      } />
+      
 		</div>
   );
 }

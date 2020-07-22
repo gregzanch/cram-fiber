@@ -1,10 +1,11 @@
 
 import { Object3D, Mesh, SphereBufferGeometry, MeshStandardMaterial } from "three";
+import { ObjectProps } from './Objects';
 import { MathUtils } from "three/src/math/MathUtils";
 
-export interface AcousticSourceProps {
+export interface AcousticSourceProps extends ObjectProps {
   name: string;
-  kind: string;
+  kind: "AcousticSource";
   visible: boolean;
   position: [number, number, number];
   scale: [number, number, number];

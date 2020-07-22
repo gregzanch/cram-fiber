@@ -45,6 +45,7 @@ import { ContainerProps } from "react-three-fiber/targets/shared/web/ResizeConta
 import AcousticSource, { AcousticSourceProps } from "./Objects/AcousticSource";
 
 import { expose } from '../../util';
+import AcousticSourceComponent from "./Objects/AcousticSourceComponent";
 
 
 
@@ -96,29 +97,6 @@ const Room = ({ displayStyle }: { displayStyle: string; }) => {
 }
 
 
-function AcousticSourceComponent({ source }: { source: AcousticSourceProps; }) {
-	const src = useMemo(() => new AcousticSource(source), []);
-	// const srcRef = useRef(src);
-
-	
-	useEffect(() => {
-		console.log('useEffect');
-		if (src.position.x !== source.position[0]) {
-			src.position.setX(source.position[0]);
-		}
-	}, [source]);
-	
-	
-	
-	// console.log(srcRef);
-	return (
-		<primitive object={src} />
-		// <acousticSource
-		// 	args={[source]}
-		// 	onClick={(e) => console.log(e)}
-		// />
-	);
-}
 
 interface ObjectsProps {
 	displayStyle: string,
@@ -177,7 +155,7 @@ export function Editor() {
 		invalidateFrameloop: true,
 		pixelRatio: window.devicePixelRatio,
 		style: {
-			background: "rgb(251,250,249)"
+			background: "rgb(251,250,250)"
 		},
 		camera: {
 			up: [0, 0, 1],
@@ -194,23 +172,12 @@ export function Editor() {
 	
 	const orbitRef = useRef<OrbitControls>();
 
-	
-	// useEffect(() => {
-	// 	if (transform.current) {
-	// 		expose({ transform: transform.current });
-	// 	}
-	// }, [displayStyleState])
-	
-	
-	
 	const handleMouseEnter = () => {
 		setHotkeyScope(HOTKEY_SCOPES.EDITOR);
 	}
 	
 	
 	const transformRef = useRef<TransformControls>();
-	
-
 	
 	return (
 		<div className="editor-container" onMouseEnter={handleMouseEnter}>
