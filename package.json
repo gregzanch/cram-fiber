@@ -21,7 +21,7 @@
     "react-three-gui": "^0.1.5",
     "react-use-measure": "^2.0.1",
     "recoil": "^0.0.10",
-    "three": "^0.117.1",
+    "three": "^0.125.0",
     "typescript": "^3.9.6",
     "uuid": "^8.2.0"
   },
